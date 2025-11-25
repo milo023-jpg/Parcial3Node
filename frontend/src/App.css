@@ -1,42 +1,377 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* =========================================================
+   PALETA DE COLORES FEMENINOS PASTEL
+========================================================= */
+:root {
+  --rosa-suave: #F8C8DC;
+  --violeta-pastel: #D6B5FF;  /* Un poco más claro para iPhone */
+  --lavanda-intensa: #B497FF;
+  --fucsia-acento: #E84393;
+  --durazno: #FFB5A7;
+
+  --gris-oscuro: #2E2E32;
+  --gris-violeta: #6B6A75;
+  --blanco: #FFFFFF;
+
+  --card-radius: 18px;
+}
+
+
+
+/* =========================================================
+   BODY — FONDO (MOBILE FIRST)
+========================================================= */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nunito', sans-serif;
+  color: var(--gris-oscuro);
+
+  /* Degradado suave visible en pantallas retina */
+  background: linear-gradient(
+    135deg,
+    var(--rosa-suave),
+    var(--violeta-pastel)
+  );
+
+  /* Para que NO se recorte al abrir teclado en iPhone */
+  min-height: 100dvh;
+
+  /* Hace el fondo más suave en pantallas OLED */
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+/* =========================================================
+   CONTENEDOR LOGIN — CENTRADO PARA iPHONE
+========================================================= */
+
+.login-wrapper {
+  min-height: 100dvh; /* 100vh dinámico, evita salto por teclado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Espaciado seguro para pantallas pequeñas */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+
+/* =========================================================
+   CARD — DISEÑO ADAPTABLE PARA MÓVIL
+========================================================= */
+
+.card {
+  background: var(--blanco);
+  padding: 28px 22px;
+  border-radius: var(--card-radius);
+  width: 100%;
+  max-width: 340px;  /* Perfecto para iPhone SE, 12 mini y Android */
+  box-sizing: border-box;
+
+  /* Sombra suave que se ve bien en pantallas Retina */
+  box-shadow: 0px 4px 18px rgba(0,0,0,0.15);
+
+  animation: fadeIn 0.7s ease;
+}
+
+
+
+/* =========================================================
+   INPUTS (OPTIMIZADOS PARA iPHONE)
+========================================================= */
+
+input {
+  width: 100%;
+  height: 48px;            /* Tamaño adecuado para dedo */
+  padding: 12px;
+  padding-left: 40px;
+  border: 1px solid var(--gris-violeta);
+  border-radius: 12px;
+  margin-bottom: 18px;
+  background: #fff;
+  font-size: 16px;         /* Evita ZOOM automático en iPhone */
+  box-sizing: border-box;
+
+  /* Mejor legibilidad en pantallas brillantes */
+  -webkit-text-size-adjust: none;
+}
+
+input::placeholder {
+  color: var(--gris-violeta);
+}
+
+
+
+/* =========================================================
+  BOTÓN PRIMARIO — MOBILE-FRIENDLY
+========================================================= */
+
+.btn-primary {
+  background-color: var(--lavanda-intensa);
+  color: white;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 17px;     /* Legible en móvil */
+  cursor: pointer;
+  border: none;
+  transition: 0.25s ease;
+  width: 100%;
+
+  /* Más tacto en pantallas pequeñas */
+  touch-action: manipulation;
+}
+
+.btn-primary:hover {
+  background-color: var(--fucsia-acento);
+  transform: scale(1.03);
+}
+
+
+
+/* =========================================================
+   TEXTO — AJUSTES PARA iPHONE
+========================================================= */
+
+h2 {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+p {
+  font-size: 15px;
+}
+
+
+
+/* =========================================================
+   ANIMACIONES — SUAVES PARA DISPOSITIVOS MÓVILES
+========================================================= */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* =========================================================
+   MEDIA QUERIES — IPHONE SE / MINI
+========================================================= */
+
+@media (max-width: 380px) {
+  .card {
+    padding: 22px 18px;
+    max-width: 300px;
+  }
+
+  input {
+    height: 45px;
+    font-size: 15px; /* Sigue sin activar zoom */
+  }
+
+  .btn-primary {
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+/* ================================================
+   LOGIN — OPTIMIZADO PARA MÓVILES / iPHONE
+================================================= */
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 22px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 35px 28px;
+  border-radius: 20px;
+  text-align: center;
+  background: var(--blanco);
+  box-shadow: 0px 4px 14px rgba(0,0,0,0.12);
+  animation: fadeIn 0.7s ease;
+}
+
+/* TITULOS */
+.login-title {
+  font-family: 'Poppins';
+  font-size: 26px;
+  color: var(--lavanda-intensa);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.login-subtitle {
+  color: var(--gris-violeta);
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+/* ERROR */
+.login-error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* INPUTS */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  height: 48px; /* altura recomendada para iPhone */
+  padding-left: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--gris-violeta);
+  font-size: 16px; /* legible en retina */
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: var(--gris-violeta);
+  font-size: 16px;
+}
+
+/* OLVIDASTE CONTRASEÑA */
+.forgot-password {
+  font-size: 14px;
+  margin-top: 18px;
+  cursor: pointer;
+  color: var(--fucsia-acento);
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.forgot-password:hover {
+  opacity: 0.7;
+}
+
+/* BOTÓN */
+.btn-primary {
+  width: 100%;
+  height: 48px; /* ergonomía móvil */
+  font-size: 17px;
+  border-radius: 12px;
+  background: var(--lavanda-intensa);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.btn-primary:hover {
+  background-color: var(--fucsia-acento);
+  transform: scale(1.03);
+}
+
+/* =========================================================
+   SIDEBAR LATERAL – ESTILO PASTEL SUAVE
+========================================================= */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -260px;
+  width: 260px;
+  height: 100vh;
+  background: var(--blanco);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  padding: 25px 20px;
+  box-sizing: border-box;
+  z-index: 2000;
+  transition: left 0.35s ease;
+  border-radius: 0 20px 20px 0;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--lavanda-intensa);
+  margin-bottom: 25px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.sidebar-menu a {
+  display: block;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  background: var(--rosa-suave);
+  color: var(--gris-oscuro);
+  border-radius: 12px;
+  transition: 0.25s ease;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.sidebar-menu a:hover {
+  background: var(--violeta-pastel);
+  color: white;
 }
 
-.card {
-  padding: 2em;
+/* Botón hamburguesa */
+.sidebar-toggle {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 2500;
+  background: var(--lavanda-intensa);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
 }
 
-.read-the-docs {
-  color: #888;
+.sidebar-toggle:active {
+  transform: scale(0.96);
+}
+
+/* Fondo oscuro al abrir */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 1500;
+}
+
+/* Contenido general */
+.page-container {
+  min-height: 100vh;
+  padding: 25px;
+  padding-left: 20px;
+}
+
+.content {
+  margin-top: 60px;
+  text-align: center;
 }
