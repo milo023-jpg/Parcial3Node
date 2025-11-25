@@ -4,22 +4,22 @@ const express = require("express");
 const router = express.Router();
 const citaController = require("../controllers/citaController");
 
-// Obtener citas por empleada y fecha (público)
-router.get("/", citaController.obtenerCitasPublico);
-
-// Obtener todas las citas por empleada
+// Obtener todas las citas
 router.get("/todas", citaController.obtenerTodasPublico);
 
-// Crear cita (público)
+// Obtener citas por fecha
+router.get("/", citaController.obtenerCitasPublico);
+
+// Crear
 router.post("/", citaController.crearCitaPublico);
 
-// Editar cita (público)
+// Editar
 router.put("/:id", citaController.editarCitaPublico);
 
-// Cambiar estado (público)
+// Cambiar estado
 router.patch("/:id/estado", citaController.cambiarEstadoPublico);
 
-// Cancelar cita (público)
+// Cancelar
 router.patch("/:id/cancelar", citaController.cancelarCitaPublico);
 
 module.exports = router;
