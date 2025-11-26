@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -72,7 +73,20 @@ export default function Login() {
           <button type="submit" className="btn-primary">Iniciar sesión</button>
         </form>
 
-        <p className="forgot-password">¿Olvidaste tu contraseña?</p>
+      {/* 🔗 ENLACE A RECUPERAR CONTRASEÑA */}
+        <p className="forgot-password">
+          <Link
+            to="/recuperar"
+            style={{
+              color: "var(--fucsia-acento)",
+              textDecoration: "none",
+              fontWeight: "600",
+            }}
+          >
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </p>
+
       </div>
     </div>
   );

@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear(); // Limpiamos datos de la sesión
+    setOpen(false);       // Cerramos el menú
+    navigate("/");        // Redirigimos al login
+  };
 
   return (
     <>
@@ -24,12 +31,33 @@ export default function Sidebar() {
           <Link to="/cliente">👩 Cliente</Link>
           <Link to="/citas">📆 Gestión de citas</Link>
           <Link to="/ventas">💲 Historial de ventas</Link>
+
+          {/* Botón cerrar sesión */}
+          <button
+            onClick={handleLogout}
+            style={{
+              marginTop: "25px",
+              padding: "12px",
+              width: "100%",
+              background: "var(--fucsia-acento)",
+              color: "white",
+              fontSize: "15px",
+              borderRadius: "12px",
+              border: "none",
+              cursor: "pointer"
+            }}
+          >
+            🚪 Cerrar sesión
+          </button>
         </nav>
       </div>
 
-      {/* Fondo oscuro al abrir */}
+      {/* Fondo oscuro */}
       {open && (
-        <div className="sidebar-overlay" onClick={() => setOpen(false)}></div>
+        <div
+          className="sidebar-overlay"
+          onClick={() => setOpen(false)}
+        />
       )}
     </>
   );
