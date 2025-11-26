@@ -30,6 +30,7 @@ export default function Sidebar() {
           <Link to="/servicios">💅 Servicios</Link>
           <Link to="/cliente">👩 Cliente</Link>
           <Link to="/citas">📆 Gestión de citas</Link>
+          <Link to="/reportes">📊 Reportes</Link>
           <Link to="/ventas">💲 Historial de ventas</Link>
 
           {/* Botón cerrar sesión */}

@@ -1,0 +1,283 @@
+.ventas-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.filtros-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.filtros-card h3 {
+  margin: 0 0 15px 0;
+  color: #ff1493;
+  font-size: 18px;
+}
+
+.filtros-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.filtro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filtro-item label {
+  font-weight: 600;
+  color: #666;
+  font-size: 14px;
+}
+
+.input-filtro {
+  padding: 10px 12px;
+  border: 2px solid #ffd1dc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-filtro:focus {
+  border-color: #ff69b4;
+}
+
+.filtros-botones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-aplicar,
+.btn-limpiar {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-aplicar {
+  background: linear-gradient(135deg, #ff69b4, #ff1493);
+  color: white;
+}
+
+.btn-aplicar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.3);
+}
+
+.btn-limpiar {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.btn-limpiar:hover {
+  background: #e0e0e0;
+}
+
+.resumen-ventas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+
+.resumen-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.resumen-icon {
+  font-size: 36px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #ffd1dc, #ffb3d9);
+  border-radius: 12px;
+}
+
+.resumen-card h4 {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.resumen-valor {
+  margin: 5px 0 0 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ff1493;
+}
+
+.metodos-pago-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.metodos-pago-card h3 {
+  margin: 0 0 15px 0;
+  color: #ff1493;
+  font-size: 18px;
+}
+
+.metodos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.metodo-item {
+  background: linear-gradient(135deg, #fff5f7, #ffe4e9);
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.metodo-nombre {
+  font-weight: 600;
+  color: #ff1493;
+  text-transform: capitalize;
+}
+
+.metodo-cantidad {
+  font-size: 13px;
+  color: #666;
+}
+
+.metodo-total {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+}
+
+.ventas-tabla-card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.ventas-tabla-card h3 {
+  margin: 0 0 15px 0;
+  color: #ff1493;
+  font-size: 18px;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+}
+
+.tabla-ventas {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabla-ventas thead {
+  background: linear-gradient(135deg, #ffd1dc, #ffb3d9);
+}
+
+.tabla-ventas th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+}
+
+.tabla-ventas td {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  font-size: 14px;
+}
+
+.tabla-ventas tbody tr:hover {
+  background: #fff5f7;
+}
+
+.badge-metodo {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.badge-metodo.efectivo {
+  background: #c8e6c9;
+  color: #2e7d32;
+}
+
+.badge-metodo.tarjeta {
+  background: #b3e5fc;
+  color: #0277bd;
+}
+
+.badge-metodo.transferencia {
+  background: #e1bee7;
+  color: #7b1fa2;
+}
+
+.badge-metodo.otro {
+  background: #ffccbc;
+  color: #d84315;
+}
+
+.monto {
+  font-weight: 700;
+  color: #ff1493;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-style: italic;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 16px;
+  color: #ff69b4;
+}
+
+@media (max-width: 768px) {
+  .filtros-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .resumen-ventas {
+    grid-template-columns: 1fr;
+  }
+
+  .metodos-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabla-ventas th,
+  .tabla-ventas td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}

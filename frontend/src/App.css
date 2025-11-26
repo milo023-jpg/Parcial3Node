@@ -3,10 +3,16 @@
 ========================================================= */
 :root {
   --rosa-suave: #F8C8DC;
-  --violeta-pastel: #D6B5FF;  /* Un poco más claro para iPhone */
+  --violeta-pastel: #D6B5FF;
   --lavanda-intensa: #B497FF;
   --fucsia-acento: #E84393;
   --durazno: #FFB5A7;
+  --rosa-claro: #ffd1dc;
+  --rosa-medio: #ffb3d9;
+  --azul-pastel: #b3e5fc;
+  --verde-pastel: #c8e6c9;
+  --morado-pastel: #e1bee7;
+  --naranja-pastel: #ffccbc;
 
   --gris-oscuro: #2E2E32;
   --gris-violeta: #6B6A75;
@@ -374,4 +380,27 @@ p {
 .content {
   margin-top: 60px;
   text-align: center;
+}
+
+/* =========================================================
+   ESTILOS GLOBALES ADICIONALES
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mejoras de accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--fucsia-acento);
+  outline-offset: 2px;
 }
