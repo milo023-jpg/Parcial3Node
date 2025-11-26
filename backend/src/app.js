@@ -16,12 +16,14 @@ const servicioRoutes = require("./routes/servicioRoutes");
 const citaRoutes = require("./routes/citaRoutes");
 const reporteRoutes = require("./routes/reporteRoutes");
 
+
 // Registrar rutas con prefijo /api
 app.use("/api/auth", authRoutes);
 app.use("/api/clientes", clienteRoutes);
 app.use("/api/servicios", servicioRoutes);
 app.use("/api/citas", citaRoutes);
 app.use("/api/reportes", reporteRoutes);
+app.use("/api/clientes", clienteRoutes);
 
 // Ruta base simple para comprobar el estado del servidor
 app.get("/", (req, res) => {

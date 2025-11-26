@@ -4,6 +4,7 @@ import Calendario from "./pages/calendario";
 import RecuperarEmail from "./pages/RecuperarEmail";
 import RecuperarPregunta from "./pages/RecuperarPregunta";
 import RecuperarNueva from "./pages/RecuperarNueva";
+import Cliente from "./pages/Cliente";
 
 function App() {
 
@@ -12,8 +13,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
 
-        {/* RUTAS PROTEGIDAS */}
         <Route path="/calendario" element={<Calendario />} />
+        <Route path="/cliente" element={<Cliente />} />
 
         {/* Recuperación de contraseña */}
         <Route path="/recuperar" element={<RecuperarEmail />} />
