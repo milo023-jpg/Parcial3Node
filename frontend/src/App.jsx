@@ -6,6 +6,7 @@ import RecuperarNueva from "./pages/RecuperarNueva";
 import Cliente from "./pages/Cliente";
 import ReportesPage from "./pages/ReportesPage";
 import HistorialVentas from "./pages/HistorialVentas";
+import Servicios from "./pages/Servicios";
 
 import Calendario from "./pages/citas/CalendarioPage";
 import AgendaDiariaPage from "./pages/citas/AgendaDiariaPage";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/cliente" element={<Cliente />} />
         <Route path="/reportes" element={<ReportesPage />} />
         <Route path="/ventas" element={<HistorialVentas />} />
+        <Route path="/servicios" element={<Servicios />} />
 
         {/* Recuperación de contraseña */}
         <Route path="/recuperar" element={<RecuperarEmail />} />

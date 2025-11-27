@@ -421,3 +421,141 @@ html {
 .nav-btn:hover {
   background: #d89aff;
 }
+/* === TÍTULO DE LA SECCIÓN CLIENTES === */
+.titulo-clientes-box {
+  background: #ffffff;
+  padding: 12px 20px;
+  border-radius: 14px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  margin: 0 auto 20px auto;
+  width: fit-content;
+  max-width: 90%;
+}
+
+.titulo-clientes-text {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #ff1493;
+  text-align: center;
+}
+
+/* ==========================
+   Estilos específicos para Servicios (añadir al final de app.css)
+   ========================== */
+
+.page-title-card {
+  background: white;
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.page-title {
+  margin: 0;
+  color: var(--fucsia-acento);
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+
+.page-subtitle {
+  margin: 6px 0 0 0;
+  color: var(--gris-violeta);
+  font-size: 13px;
+}
+
+/* Lista de servicios */
+.servicios-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* Card de servicio (ligera variación) */
+.servicio-card {
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.servicio-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+}
+
+/* Modal overlay y modal card */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+  padding: 16px;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  border-radius: 14px;
+  position: relative;
+}
+
+/* Close button inside modal */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--fucsia-acento);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* no-data style */
+.no-data {
+  background: white;
+  padding: 26px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  text-align: center;
+  color: #777;
+  font-style: italic;
+}
+
+/* Inputs inside modal use global input rules but make them comfortable inside modal */
+.modal-card input[type="text"],
+.modal-card input[type="number"],
+.modal-card textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--gris-violeta);
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+/* Buttons inside servicio cards keep using .btn-primary but allow smaller size */
+.servicio-card .btn-primary {
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 720px) {
+  .servicios-list {
+    grid-template-columns: 1fr;
+  }
+
+  .page-title-card {
+    padding: 14px;
+  }
+}
