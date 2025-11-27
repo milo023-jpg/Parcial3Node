@@ -1,7 +1,6 @@
 .layout-base {
   min-height: 100vh;
   background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 50%, #ffd1dc 100%);
-  padding-bottom: 80px;
 }
 
 .layout-content {
