@@ -27,7 +27,7 @@ module.exports = {
   // ============================
   // Obtener todas las citas por empleada
   // ============================
-  obtenerTodasPorEmpleada: async (empleadaId) => {
+  /* obtenerTodasPorEmpleada: async (empleadaId) => {
     const [rows] = await pool.query(
       `
     SELECT c.*, cl.nombre, cl.apellido
@@ -40,6 +40,55 @@ module.exports = {
     );
 
     return rows;
+  }, */
+
+  obtenerTodasPorEmpleada: async (empleadaId) => {
+    const [citas] = await pool.query(
+      `
+      SELECT 
+        c.*,
+        cl.nombre AS cliente_nombre,
+        cl.apellido AS cliente_apellido
+      FROM citas c
+      INNER JOIN clientes cl ON cl.id = c.cliente_id
+      WHERE c.empleada_id = ?
+      ORDER BY c.fecha_inicio ASC
+    `,
+      [empleadaId]
+    );
+
+    // POR CADA CITA → CONSULTA SERVICIOS
+    for (let cita of citas) {
+      const [servicios] = await pool.query(
+        `
+        SELECT 
+          s.id,
+          s.nombre,
+          cs.precio_servicio AS precio,
+          cs.duracion_minutos AS duracion,
+          cs.orden
+        FROM cita_servicios cs
+        INNER JOIN servicios s ON s.id = cs.servicio_id
+        WHERE cs.cita_id = ?
+        ORDER BY cs.orden ASC
+      `,
+        [cita.id]
+      );
+
+      cita.servicios = servicios;
+
+      // Agrupar cliente
+      cita.cliente = {
+        nombre: cita.cliente_nombre,
+        apellido: cita.cliente_apellido,
+      };
+
+      // limpiar campos viejos
+      delete cita.cliente_nombre;
+      delete cita.cliente_apellido;
+    }
+
+    return citas;
   },
 
   // ============================
@@ -208,5 +257,57 @@ module.exports = {
       citaId,
     ]);
     return { mensaje: "Cita cancelada" };
+  },
+
+  // ============================
+  // Obtener citas por día (CON servicios)
+  // ============================
+  obtenerCitasPorDiaCompleto: async (empleadaId, fecha) => {
+    // 1. Traer las citas básicas
+    const [citas] = await pool.query(
+      `
+    SELECT 
+      c.*,
+      cl.nombre AS cliente_nombre,
+      cl.apellido AS cliente_apellido
+    FROM citas c
+    INNER JOIN clientes cl ON cl.id = c.cliente_id
+    WHERE c.empleada_id = ?
+      AND DATE(c.fecha_inicio) = ?
+    ORDER BY c.fecha_inicio ASC
+  `,
+      [empleadaId, fecha]
+    );
+
+    // 2. POR CADA CITA — obtener servicios
+    for (let c of citas) {
+      const [servicios] = await pool.query(
+        `
+      SELECT 
+        s.id,
+        s.nombre,
+        cs.precio_servicio AS precio,
+        cs.duracion_minutos AS duracion,
+        cs.orden
+      FROM cita_servicios cs
+      INNER JOIN servicios s ON s.id = cs.servicio_id
+      WHERE cs.cita_id = ?
+      ORDER BY cs.orden ASC
+    `,
+        [c.id]
+      );
+
+      c.servicios = servicios;
+
+      c.cliente = {
+        nombre: c.cliente_nombre,
+        apellido: c.cliente_apellido,
+      };
+
+      delete c.cliente_nombre;
+      delete c.cliente_apellido;
+    }
+
+    return citas;
   },
 };

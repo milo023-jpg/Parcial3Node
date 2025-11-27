@@ -1,9 +1,16 @@
-// src/routes/citaRoutes.js
 
 const express = require("express");
 const router = express.Router();
 const citaController = require("../controllers/citaController");
 const pagoController = require("../controllers/pagoController");
+
+// ---- RUTAS TEMPORALES PARA NO DEPENDER DE PERSONA 1 ----
+router.get("/clientes", citaController.obtenerClientes);
+router.get("/servicios", citaController.obtenerServicios);
+
+// Servicios de una cita específica
+router.get("/:id/servicios", citaController.obtenerServiciosDeCita);
+
 
 // Obtener todas las citas
 router.get("/todas", citaController.obtenerTodasPublico);

@@ -8,13 +8,20 @@ const citaService = require("../services/citaService");
 exports.obtenerCitasPublico = async (req, res) => {
   try {
     const empleadaId = req.query.empleada_id;
-    const fecha = req.query.fecha;
+    let fecha = req.query.fecha;
 
     if (!empleadaId) {
       return res.status(400).json({ error: "empleada_id es requerido" });
     }
 
-    const citas = await citaService.obtenerCitasPorDia(empleadaId, fecha);
+    // Prevenir fallos si el frontend no envía fecha
+    const fechaFinal = fecha || new Date().toISOString().split("T")[0];
+
+    const citas = await citaService.obtenerCitasPorDiaCompleto(
+      empleadaId,
+      fechaFinal
+    );
+
     res.json(citas);
 
   } catch (error) {
@@ -22,6 +29,7 @@ exports.obtenerCitasPublico = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // =============================
 // Obtener todas las citas sin autenticación
@@ -111,6 +119,76 @@ exports.cancelarCitaPublico = async (req, res) => {
 
   } catch (error) {
     console.error("Error cancelarCitaPublico:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+const pool = require("../config/db");
+
+// =============================
+// Obtener clientes (temporal)
+// =============================
+exports.obtenerClientes = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT id, nombre, apellido, telefono, alias 
+      FROM clientes
+      ORDER BY nombre ASC
+    `);
+
+    res.json(rows);
+
+  } catch (error) {
+    console.error("Error obtenerClientes:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// =============================
+// Obtener servicios activos (temporal)
+// =============================
+exports.obtenerServicios = async (req, res) => {
+  try {
+    const [rows] = await pool.query(`
+      SELECT id, nombre, descripcion, duracion_minutos, precio
+      FROM servicios
+      WHERE activo = 1
+      ORDER BY nombre ASC
+    `);
+
+    res.json(rows);
+
+  } catch (error) {
+    console.error("Error obtenerServicios:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// =============================
+// Obtener servicios de una cita
+// =============================
+exports.obtenerServiciosDeCita = async (req, res) => {
+  try {
+    const citaId = req.params.id;
+
+    const [rows] = await pool.query(`
+      SELECT 
+        s.id,
+        s.nombre,
+        cs.precio_servicio AS precio,
+        cs.duracion_minutos AS duracion,
+        cs.orden
+      FROM cita_servicios cs
+      INNER JOIN servicios s ON s.id = cs.servicio_id
+      WHERE cs.cita_id = ?
+      ORDER BY cs.orden ASC
+    `, [citaId]);
+
+
+    res.json(rows);
+
+  } catch (error) {
+    console.error("Error obtenerServiciosDeCita:", error);
     res.status(500).json({ error: error.message });
   }
 };
