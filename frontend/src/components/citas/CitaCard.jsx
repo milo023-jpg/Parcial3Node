@@ -57,7 +57,7 @@ export default function CitaCard({ cita, onEdit, onCancel, onEstado }) {
       <p style={{ margin: "4px 0", fontWeight: "500" }}>
         {new Date(cita.fecha_inicio).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })} 
           {" → "}
-        {new Date(cita.fecha_fin).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+         {new Date(cita.fecha_fin).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
       </p>
 
       {/* ====================== */}

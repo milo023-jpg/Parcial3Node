@@ -97,15 +97,17 @@ export default function CitaModal({ cita, onClose, onUpdate }) {
 
         {/* BOTONES ACCIÓN */}
         <div className="modal-btn-group">
-          <button className="btn-editar" onClick={editarCita}>
-            ✏️ Editar
-          </button>
+          {cita.estado !== "cancelada" && cita.estado !== "finalizada" && (
+            <button className="btn-editar" onClick={editarCita}>
+              ✏️ Editar
+            </button>
+          )}
 
           <button className="btn-dia" onClick={verDiaCompleto}>
             📅 Ver día completo
           </button>
 
-          {cita.estado !== "cancelada" && (
+          {cita.estado !== "cancelada" && cita.estado !== "finalizada" && (
             <button className="btn-cancelar" onClick={cancelarCita}>
               ❌ Cancelar cita
             </button>

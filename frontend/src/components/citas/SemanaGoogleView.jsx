@@ -5,11 +5,14 @@ import "./SemanaGoogleView.css";
 import { useState } from "react";
 import CitaModal from "./CitaModal";
 
+import { useNavigate } from "react-router-dom";
+
 // Horas visibles (puedes ajustar)
 const HORA_INICIO = 5;
 const HORA_FIN = 23;
 
 export default function SemanaGoogleView({ semanaDias, citas, onUpdate }) {
+  const navigate = useNavigate();
   const [citaSeleccionada, setCitaSeleccionada] = useState(null);
   // Agrupar citas por día
   const citasPorDia = {};
@@ -75,6 +78,13 @@ export default function SemanaGoogleView({ semanaDias, citas, onUpdate }) {
         onClose={() => setCitaSeleccionada(null)}
         onUpdate={onUpdate}
       />
+      {/* BOTÓN FLOTANTE PARA CREAR CITA */}
+      <button 
+        className="fab-crear-cita"
+        onClick={() => navigate("/citas/nueva")}
+      >
+        +
+      </button>
     </div>
   );
 }
