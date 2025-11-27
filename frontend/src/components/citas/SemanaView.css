@@ -1,0 +1,42 @@
+.semana-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.dia-col {
+  background: #fef6ff;
+  padding: 6px;
+  border-radius: 14px;
+  min-height: 120px;
+}
+
+.dia-header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.dia-nombre {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: #555;
+}
+
+.dia-numero {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #a020f0;
+}
+
+.dia-citas {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.dia-sin-citas {
+  text-align: center;
+  font-size: 11px;
+  color: #999;
+}

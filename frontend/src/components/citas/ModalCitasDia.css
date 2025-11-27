@@ -1,0 +1,59 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-citas {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  max-height: 80vh;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-close {
+  background: #ff5c8a;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-body {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  overflow-y: auto;
+}
+
+.btn-ver-dia {
+  background: #b28bff;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 14px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-ver-dia:disabled {
+  opacity: 0.5;
+  cursor: default;
+}

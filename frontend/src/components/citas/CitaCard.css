@@ -1,0 +1,79 @@
+.cita-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.cita-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.12);
+}
+
+.cita-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cita-hora {
+  color: #6b6b6b;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.cita-servicios {
+  margin-bottom: 6px;
+}
+
+.servicio-chip {
+  display: inline-block;
+  background: #e8d7ff;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  margin-right: 5px;
+  margin-bottom: 4px;
+}
+
+.cita-total {
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a2be2;
+}
+
+.cita-card-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cita-card-buttons button {
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+}
+
+.btn-editar {
+  background: #a78bfa;
+  color: white;
+}
+
+.btn-cancelar {
+  background: #fda4af;
+}
+
+.btn-en-curso {
+  background: #fde047;
+}
+
+.btn-finalizar {
+  background: #86efac;
+}

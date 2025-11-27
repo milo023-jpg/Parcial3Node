@@ -1,0 +1,55 @@
+.mes-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.mes-header-cell {
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  padding-bottom: 4px;
+  color: #555;
+}
+
+.mes-cell {
+  min-height: 60px;
+  border-radius: 12px;
+  padding: 4px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.mes-cell-out {
+  opacity: 0.4;
+}
+
+.mes-cell-day {
+  font-size: 13px;
+  font-weight: 700;
+  color: #7a1bb2;
+}
+
+.mes-cell-count {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.fab-crear-cita {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  width: 55px;
+  height: 55px;
+  background: #b083ff;
+  color: white;
+  font-size: 38px;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

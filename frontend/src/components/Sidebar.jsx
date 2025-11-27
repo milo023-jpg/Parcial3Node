@@ -27,9 +27,10 @@ export default function Sidebar() {
 
         <nav className="sidebar-menu">
           <Link to="/calendario">📅 Calendario</Link>
+          <Link to="/agenda">🗓 Agenda diaria</Link>
+          <Link to="/citas/nueva">📝 Crear Cita</Link>
           <Link to="/servicios">💅 Servicios</Link>
           <Link to="/cliente">👩 Cliente</Link>
-          <Link to="/citas">📆 Gestión de citas</Link>
           <Link to="/reportes">📊 Reportes</Link>
           <Link to="/ventas">💲 Historial de ventas</Link>
 

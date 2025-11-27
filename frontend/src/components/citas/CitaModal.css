@@ -1,0 +1,96 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  width: 85%;
+  max-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-title {
+  margin: 0;
+  padding-bottom: 10px;
+  text-align: center;
+  color: #8A2BE2;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-servicios-list {
+  padding-left: 20px;
+  margin-top: 4px;
+}
+
+.modal-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #b083ff;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modal-btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-editar {
+  background: #a78bfa;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+.btn-dia {
+  background: #7dd3fc;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+  color: #0c4a6e;
+}
+
+.btn-cancelar {
+  background: #fda4af;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+.btn-en-curso {
+  background: #fde047;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
+
+.btn-finalizar {
+  background: #86efac;
+  padding: 10px;
+  border-radius: 12px;
+  border: none;
+}
