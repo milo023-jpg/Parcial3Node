@@ -1,5 +1,4 @@
 import Sidebar from "./Sidebar";
-import BottomNav from "./BottomNav";
 import "./LayoutBase.css";
 
 export default function LayoutBase({ children, title }) {
@@ -18,8 +17,6 @@ export default function LayoutBase({ children, title }) {
           {children}
         </main>
       </div>
-
-      <BottomNav />
     </div>
   );
 }
