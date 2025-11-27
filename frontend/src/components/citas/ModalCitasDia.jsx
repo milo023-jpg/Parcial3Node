@@ -8,6 +8,10 @@ export default function ModalCitasDia({
   fechaLabel,
   citas,
   onVerDiaCompleto,
+  onEdit,
+  onEstado,
+  onCancel,
+  onCrearCita, // ← nueva prop para el botón "Crear cita"
 }) {
   if (!isOpen) return null;
 
@@ -25,13 +29,13 @@ export default function ModalCitasDia({
           {citas.length === 0 ? (
             <p>No hay citas para este día.</p>
           ) : (
-            citas.map((c) => (
+            citas.map((cita) => (
               <CitaCard
                 key={cita.id}
                 cita={cita}
-                onEdit={() => editarCita(cita.id)}
-                onEstado={(nuevoEstado) => cambiarEstado(cita.id, nuevoEstado)}
-                onCancel={() => cancelarCita(cita.id)}
+                onEdit={() => onEdit(cita.id)}
+                onEstado={(nuevoEstado) => onEstado(cita.id, nuevoEstado)}
+                onCancel={() => onCancel(cita.id)}
               />
             ))
           )}
@@ -44,14 +48,8 @@ export default function ModalCitasDia({
         >
           Ver día completo
         </button>
-        <button
-          className="btn-dia"
-          onClick={() => {
-            const fecha = diaSeleccionado; // “YYYY-MM-DD”
-            navigate(`/citas/nueva?fecha=${fecha}`);
-            onClose();
-          }}
-        >
+
+        <button className="btn-dia" onClick={onCrearCita}>
           ➕ Crear cita este día
         </button>
       </div>
