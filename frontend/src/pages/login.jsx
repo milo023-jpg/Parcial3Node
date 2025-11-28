@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { FaEnvelope, FaLock } from "react-icons/fa";
-
+import logo from "../assets/logo.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -39,6 +39,18 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       <div className="login-card">
+
+        {/* ⭐ LOGO (AGREGADO SIN MODIFICAR NADA MÁS) */}
+        <img
+          src={logo}
+          alt="Logo"
+          style={{
+            width: "180px",
+            display: "block",
+            margin: "0 auto 20px auto"
+          }}
+        />
+
         <h2 className="login-title">Bienvenida ✨</h2>
         <p className="login-subtitle">Inicia sesión para continuar</p>
 
@@ -73,7 +85,7 @@ export default function Login() {
           <button type="submit" className="btn-primary">Iniciar sesión</button>
         </form>
 
-      {/* 🔗 ENLACE A RECUPERAR CONTRASEÑA */}
+        {/* 🔗 ENLACE A RECUPERAR CONTRASEÑA */}
         <p className="forgot-password">
           <Link
             to="/recuperar"
