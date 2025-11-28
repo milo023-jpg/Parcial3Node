@@ -7,7 +7,6 @@ import Sidebar from "../../components/Sidebar";
 import "./CrearEditarCita.css";
 
 export default function EditarCitaPage() {
-  console.log("📌 Entré a EditarCitaPage");
   const navigate = useNavigate();
   const { id } = useParams();
   const empleadaId = localStorage.getItem("empleada_id") || "1";
