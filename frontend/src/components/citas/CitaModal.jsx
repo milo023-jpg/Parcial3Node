@@ -11,7 +11,7 @@ export default function CitaModal({ cita, onClose, onUpdate, onFinalizarConPago 
   const cambiarEstado = async (nuevoEstado) => {
     try {
       const res = await fetch(
-        `http://localhost:4000/api/citas/${cita.id}/estado`,
+        `${import.meta.env.VITE_API_URL}/api/citas/${cita.id}/estado`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export default function CitaModal({ cita, onClose, onUpdate, onFinalizarConPago 
       );
       if (!confirmar) return;
 
-      await fetch(`http://localhost:4000/api/citas/${cita.id}/cancelar`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/citas/${cita.id}/cancelar`, {
         method: "PATCH",
       });
 

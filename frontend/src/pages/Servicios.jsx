@@ -17,7 +17,7 @@ function Servicios() {
   const [editingId, setEditingId] = useState(null);
   const [viewingServicio, setViewingServicio] = useState(null);
 
-  const API_URL = "http://localhost:4000/api/servicios";
+  const API_URL = `${import.meta.env.VITE_API_URL}/api/servicios`;
 
   // Cargar servicios
   const fetchServicios = async () => {

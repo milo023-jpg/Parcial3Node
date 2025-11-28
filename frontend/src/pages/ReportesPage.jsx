@@ -3,7 +3,7 @@ import LayoutBase from "../components/LayoutBase";
 import { formatCurrency } from "../utils/formatters";
 import "./ReportesPage.css";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const API_URL = `${import.meta.env.VITE_API_URL}/api` || "http://localhost:4000/api";
 
 export default function ReportesPage() {
   const [resumen, setResumen] = useState(null);

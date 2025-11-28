@@ -131,7 +131,7 @@ export default function AgendaDiariaPage() {
   };
 
   const cambiarEstado = async (id, estado) => {
-    await fetch(`http://localhost:4000/api/citas/${id}/estado`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/citas/${id}/estado`, {
       method: "PATCH",
       body: JSON.stringify({ estado }),
       headers: { "Content-Type": "application/json" },
@@ -144,7 +144,7 @@ export default function AgendaDiariaPage() {
     const confirmar = window.confirm("¿Seguro que quieres cancelar esta cita?");
     if (!confirmar) return;
 
-    await fetch(`http://localhost:4000/api/citas/${id}/cancelar`, {
+    await fetch(`${import.meta.env.VITE_API_URL}/api/citas/${id}/cancelar`, {
       method: "PATCH",
     });
 

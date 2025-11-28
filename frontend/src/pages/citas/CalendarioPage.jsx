@@ -93,7 +93,7 @@ export default function CalendarioPage() {
 
   const confirmarPago = async ({ metodo_pago, monto }) => {
     try {
-      const response = await fetch(`${API_URL}/citas/${citaParaPago.id}/pago`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/citas/${citaParaPago.id}/pago`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ metodo_pago, monto }),

@@ -23,7 +23,7 @@ function Cliente() {
   const [filtroApellido, setFiltroApellido] = useState("");
   const [filtroTelefono, setFiltroTelefono] = useState("");
 
-  const API_URL = "http://localhost:4000/api/clientes";
+  const API_URL = `${import.meta.env.VITE_API_URL}/api/clientes`;
 
   // ============================
   //      CARGAR CLIENTES
