@@ -7,6 +7,7 @@ import Sidebar from "../../components/Sidebar";
 import "./CrearEditarCita.css";
 
 export default function CrearCitaPage() {
+  console.log("🆕 Entré a CrearCitaPage");
   const navigate = useNavigate();
   const location = useLocation();
 

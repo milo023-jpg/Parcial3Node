@@ -215,6 +215,13 @@ export default function CalendarioPage() {
     navigate(`/agenda?fecha=${modalInfo.fechaISO}`);
   };
 
+  const crearCitaEsteDia = () => {
+    if (!modalInfo.fechaISO) return;
+    cerrarModalDia(); // opcional
+    navigate(`/citas/nueva?fecha=${modalInfo.fechaISO}`);
+  };
+
+
   // =======================
   // UI
   // =======================
@@ -293,7 +300,9 @@ export default function CalendarioPage() {
         fechaLabel={modalInfo.label}
         citas={modalInfo.citas}
         onVerDiaCompleto={verDiaCompleto}
+        onCrearCita={crearCitaEsteDia}   // ← AGREGA ESTA LÍNEA
       />
+
     </div>
   );
 }

@@ -18,7 +18,9 @@ export default function MesView({ monthCells, citasPorDia, onDayClick }) {
       ))}
 
       {monthCells.map((cell) => {
-        const citasDia = citasPorDia[cell.iso] || [];
+        const citasDia = (citasPorDia[cell.iso] || []).filter(
+          (cita) => cita.estado !== "cancelada"
+        );
         const count = citasDia.length;
 
         return (
@@ -26,7 +28,7 @@ export default function MesView({ monthCells, citasPorDia, onDayClick }) {
             key={cell.iso + (cell.inMonth ? "m" : "o")}
             className={`mes-cell ${cell.inMonth ? "" : "mes-cell-out"}`}
             style={{ backgroundColor: getColorByCount(count) }}
-            onClick={() => count > 0 && onDayClick(cell, citasDia)}
+            onClick={() => onDayClick(cell, citasDia)}
           >
             <div className="mes-cell-day">{cell.dayNumber}</div>
             {count > 0 && (

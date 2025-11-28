@@ -19,10 +19,14 @@ export default function SemanaGoogleView({ semanaDias, citas, onUpdate }) {
   semanaDias.forEach((d) => (citasPorDia[d.iso] = []));
 
   citas.forEach((cita) => {
-    if (citasPorDia[cita.fechaLocal]) {
-      citasPorDia[cita.fechaLocal].push(cita);
-    }
-  });
+  // Ignorar o esconder canceladas
+  if (cita.estado === "cancelada") return;
+
+  if (citasPorDia[cita.fechaLocal]) {
+    citasPorDia[cita.fechaLocal].push(cita);
+  }
+});
+
 
   return (
     <div className="semana-google-container">
