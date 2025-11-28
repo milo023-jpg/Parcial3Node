@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./CitaModal.css";
 
-export default function CitaModal({ cita, onClose, onUpdate }) {
+export default function CitaModal({ cita, onClose, onUpdate, onFinalizarConPago }) {
   const navigate = useNavigate();
 
   if (!cita) return null;
@@ -127,7 +127,14 @@ export default function CitaModal({ cita, onClose, onUpdate }) {
           {cita.estado === "en_curso" && (
             <button
               className="btn-finalizar"
-              onClick={() => cambiarEstado("finalizada")}
+              onClick={() => {
+                if (onFinalizarConPago) {
+                  onClose();
+                  onFinalizarConPago(cita);
+                } else {
+                  cambiarEstado("finalizada");
+                }
+              }}
             >
               ✔️ Marcar finalizada
             </button>

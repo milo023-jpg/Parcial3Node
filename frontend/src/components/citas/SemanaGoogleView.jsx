@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const HORA_INICIO = 5;
 const HORA_FIN = 23;
 
-export default function SemanaGoogleView({ semanaDias, citas, onUpdate }) {
+export default function SemanaGoogleView({ semanaDias, citas, onUpdate, onFinalizarConPago }) {
   const navigate = useNavigate();
   const [citaSeleccionada, setCitaSeleccionada] = useState(null);
   // Agrupar citas por día
@@ -81,6 +81,7 @@ export default function SemanaGoogleView({ semanaDias, citas, onUpdate }) {
         cita={citaSeleccionada}
         onClose={() => setCitaSeleccionada(null)}
         onUpdate={onUpdate}
+        onFinalizarConPago={onFinalizarConPago}
       />
       {/* BOTÓN FLOTANTE PARA CREAR CITA */}
       <button 

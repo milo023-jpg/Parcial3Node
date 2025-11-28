@@ -311,6 +311,7 @@ export default function CalendarioPage() {
             semanaDias={semanaDias}
             citas={citas}
             onUpdate={getCitas}
+            onFinalizarConPago={finalizarConPago}
           />
         </>
       ) : (
