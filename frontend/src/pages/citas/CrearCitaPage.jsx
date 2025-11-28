@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { API_URL } from "../../config/api";
 import Sidebar from "../../components/Sidebar";
+import "./CrearEditarCita.css";
 
 export default function CrearCitaPage() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const params = new URLSearchParams(location.search);
-  const fechaParam = params.get("fecha"); 
+  const fechaParam = params.get("fecha");
 
   const empleadaId = localStorage.getItem("empleada_id") || "1";
 
@@ -20,7 +21,9 @@ export default function CrearCitaPage() {
   const [clienteId, setClienteId] = useState("");
   const [serviciosSeleccionados, setServiciosSeleccionados] = useState([]);
 
-  const [fecha, setFecha] = useState(fechaParam || new Date().toISOString().split("T")[0]);
+  const [fecha, setFecha] = useState(
+    fechaParam || new Date().toISOString().split("T")[0]
+  );
   const [hora, setHora] = useState("");
 
   const cargarDatos = async () => {
@@ -52,61 +55,96 @@ export default function CrearCitaPage() {
     }
 
     const body = {
-      cliente_id: clienteId,
-      empleada_id: empleadaId,
-      servicios: serviciosSeleccionados,
+      cliente_id: Number(clienteId),
+      empleada_id: Number(empleadaId),
+      servicios: serviciosSeleccionados.map(Number),
       fecha,
       hora,
     };
 
-    await fetch(`${API_URL}/citas`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    try {
+      const res = await fetch(`${API_URL}/citas`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
-    alert("Cita creada exitosamente");
-    navigate(`/agenda?fecha=${fecha}`);
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.error || "Error creando cita");
+        return;
+      }
+
+      alert("Cita creada exitosamente");
+      navigate(`/calendario`);
+    } catch (error) {
+      console.error("Error creando cita:", error);
+      alert("Error de conexión");
+    }
   };
 
   return (
-    <div className="layout-contenido-principal">
-      <Sidebar />
-      <h2 style={{ textAlign: "center" }}>Crear nueva cita</h2>
+    <div className="crear-cita-wrapper">
+      <div className="crear-cita-card">
+        <Sidebar />
+        <h2 className="crear-cita-title">Crear nueva cita</h2>
 
-      <div className="formulario-cita">
+        <div className="formulario-cita">
+          <label className="crear-cita-label">Cliente:</label>
+          <select
+            className="crear-cita-select"
+            value={clienteId}
+            onChange={(e) => setClienteId(e.target.value)}
+          >
+            <option value="">Seleccione...</option>
+            {clientes.map((c) => (
+              <option key={c.id} value={c.id}>
+                {c.nombre} {c.apellido} — {c.alias}
+              </option>
+            ))}
+          </select>
 
-        <label>Cliente:</label>
-        <select value={clienteId} onChange={(e) => setClienteId(e.target.value)}>
-          <option value="">Seleccione...</option>
-          {clientes.map((c) => (
-            <option key={c.id} value={c.id}>
-              {c.nombre} {c.apellido} — {c.alias}
-            </option>
-          ))}
-        </select>
+          <label className="crear-cita-label">Servicios:</label>
+          <div className="lista-servicios">
+            {servicios.map((s) => (
+              <label className="servicio-item" key={s.id}>
+                <input
+                  type="checkbox"
+                  checked={!!serviciosSeleccionados.includes(s.id)}
+                  onChange={() => toggleServicio(s.id)}
+                />
+                <div>
+                  <div className="servicio-nombre">{s.nombre}</div>
+                  <div className="servicio-duracion">
+                    ({s.duracion_minutos} min)
+                  </div>
+                </div>
+              </label>
+            ))}
+          </div>
 
-        <label>Servicios:</label>
-        <div className="lista-servicios">
-          {servicios.map((s) => (
-            <label key={s.id} className="servicio-item">
-              <input
-                type="checkbox"
-                checked={serviciosSeleccionados.includes(s.id)}
-                onChange={() => toggleServicio(s.id)}
-              />
-              {s.nombre} ({s.duracion_minutos} min)
-            </label>
-          ))}
+          <label className="crear-cita-label">Fecha:</label>
+          <input
+            className="crear-cita-input"
+            type="date"
+            value={fecha}
+            onChange={(e) => setFecha(e.target.value)}
+          />
+
+          <label className="crear-cita-label">Hora:</label>
+          <input
+            className="crear-cita-input"
+            type="time"
+            value={hora}
+            onChange={(e) => setHora(e.target.value)}
+          />
+
+          <button className="btn-crear-cita" onClick={crearCita}>
+            Crear cita
+          </button>
+          <button className="btn-cancelar-form">Cancelar</button>
         </div>
-
-        <label>Fecha:</label>
-        <input type="date" value={fecha} onChange={(e) => setFecha(e.target.value)} />
-
-        <label>Hora:</label>
-        <input type="time" value={hora} onChange={(e) => setHora(e.target.value)} />
-
-        <button className="btn-crear" onClick={crearCita}>Crear cita</button>
       </div>
     </div>
   );

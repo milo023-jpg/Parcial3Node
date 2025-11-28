@@ -31,7 +31,7 @@ module.exports = async function validarSolapamiento(
     inicio, fin
   ];
 
-  // Excluir la propia cita en edición
+  // Excluir la propia cita si estás editando
   if (excludeId) {
     sql += " AND id != ?";
     params.push(excludeId);
@@ -39,7 +39,6 @@ module.exports = async function validarSolapamiento(
 
   const [rows] = await pool.query(sql, params);
 
-  if (rows.length > 0) {
-    throw new Error("La empleada ya tiene una cita asignada en ese horario.");
-  }
+  // 👉 Solo retornamos true o false
+  return rows.length > 0;
 };

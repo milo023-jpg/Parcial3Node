@@ -1,0 +1,147 @@
+/* ========================================= */
+/* CONTENEDOR GENERAL MOBILE-FIRST           */
+/* ========================================= */
+.crear-cita-wrapper {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* ========================================= */
+/* CARD PRINCIPAL                            */
+/* ========================================= */
+.crear-cita-card {
+  background: linear-gradient(180deg, #f7d9ff, #eec2ff);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+/* ========================================= */
+/* TÍTULO                                    */
+/* ========================================= */
+.crear-cita-title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #5a0060;
+}
+
+/* ========================================= */
+/* LABELS                                    */
+/* ========================================= */
+.crear-cita-label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  margin-top: 12px;
+  color: #5a005c;
+}
+
+/* ========================================= */
+/* INPUTS Y SELECT                           */
+/* ========================================= */
+.crear-cita-input,
+.crear-cita-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #d1a5e6;
+  background: #fff;
+  font-size: 15px;
+  color: #3d003f;
+  margin-bottom: 12px;
+}
+
+.crear-cita-input:focus,
+.crear-cita-select:focus {
+  outline: none;
+  border-color: #b300c9;
+  background: #f4e3ff;
+}
+
+/* ========================================= */
+/* LISTA DE SERVICIOS                        */
+/* ========================================= */
+.servicio-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: #ffffff;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #e5c6f5;
+  margin-bottom: 10px;
+}
+
+.servicio-item input[type="checkbox"] {
+  margin-top: 4px;
+  width: 20px;
+  height: 20px;
+}
+
+.servicio-nombre {
+  font-weight: 600;
+  font-size: 15px;
+  color: #4a004e;
+}
+
+.servicio-duracion {
+  font-size: 13px;
+  color: #6b4b74;
+}
+
+/* ========================================= */
+/* BOTÓN PRINCIPAL                           */
+/* ========================================= */
+.btn-crear-cita {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #c400e6, #9b00c1);
+  color: white;
+  font-size: 17px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  margin-top: 14px;
+  transition: 0.25s;
+}
+
+.btn-crear-cita:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(160, 0, 180, 0.35);
+}
+
+/* ========================================= */
+/* BOTÓN CANCELAR                            */
+/* ========================================= */
+.btn-cancelar-form {
+  width: 100%;
+  padding: 10px;
+  background: #f6e8ff;
+  color: #6b0070;
+  font-size: 15px;
+  border: 1px solid #d8b7e6;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.btn-cancelar-form:hover {
+  background: #ecd7ff;
+}
+
+/* ========================================= */
+/* ADAPTACIÓN PARA PANTALLAS GRANDES         */
+/* ========================================= */
+@media (min-width: 600px) {
+  .crear-cita-card {
+    padding: 24px;
+  }
+
+  .crear-cita-title {
+    font-size: 24px;
+  }
+}

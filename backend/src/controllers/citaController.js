@@ -58,9 +58,15 @@ exports.obtenerTodasPublico = async (req, res) => {
 exports.crearCitaPublico = async (req, res) => {
   try {
     const { empleada_id } = req.body;
-    if (!empleada_id) return res.status(400).json({ error: "empleada_id es requerido" });
+    if (!empleada_id)
+      return res.status(400).json({ error: "empleada_id es requerido" });
 
     const nuevaCita = await citaService.crearCita(empleada_id, req.body);
+
+    if (nuevaCita.error) {
+      return res.status(400).json({ error: nuevaCita.error });
+    }
+
     res.status(201).json(nuevaCita);
 
   } catch (error) {
@@ -69,6 +75,10 @@ exports.crearCitaPublico = async (req, res) => {
   }
 };
 
+
+// =============================
+// Editar cita sin autenticación
+// =============================
 // =============================
 // Editar cita sin autenticación
 // =============================
@@ -82,6 +92,12 @@ exports.editarCitaPublico = async (req, res) => {
     }
 
     const actualizado = await citaService.editarCita(citaId, empleadaId, req.body);
+
+    // Si el service devuelve un error controlado
+    if (actualizado.error) {
+      return res.status(400).json({ error: actualizado.error });
+    }
+
     res.json(actualizado);
 
   } catch (error) {
@@ -89,6 +105,7 @@ exports.editarCitaPublico = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 // =============================
 // Cambiar estado sin autenticación

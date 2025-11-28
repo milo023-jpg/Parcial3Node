@@ -49,27 +49,30 @@ export default function AgendaDiariaPage() {
   const empleadaId = localStorage.getItem("empleada_id") || "1"; // académico
 
   const cargarCitas = async (fechaISO) => {
+    const fechaValida = fechaISO || new Date().toISOString().split("T")[0];
+
     try {
       setLoading(true);
+
       const res = await fetch(
-        `${API_URL}/citas?empleada_id=${empleadaId}&fecha=${fechaISO}`
+        `${API_URL}/citas?empleada_id=${empleadaId}&fecha=${fechaValida}`
       );
+
       const data = await res.json();
 
-      // normalizar igual que en calendario
-      const normalizadas = data.map((c) => ({
-        ...c,
-        fechaLocal: fechaISO,
-        cliente: c.cliente,
-      }));
+      if (!Array.isArray(data)) {
+        console.error("Respuesta inesperada:", data);
+        return;
+      }
 
-      setCitas(normalizadas);
-    } catch (e) {
-      console.error(e);
+      setCitas(data);
+    } catch (error) {
+      console.error("Error cargando citas:", error);
     } finally {
       setLoading(false);
     }
   };
+
 
   useEffect(() => {
     const iso = formatLocalISO(fechaActual);
@@ -115,7 +118,7 @@ export default function AgendaDiariaPage() {
       method: "PATCH",
     });
 
-    cargarCitas(); // refrescar la agenda diaria
+    await cargarCitas(); // refrescar la agenda diaria
   };
 
   const fechaFormateada = fechaActual.toLocaleDateString("es-CO", {

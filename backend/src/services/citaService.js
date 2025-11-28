@@ -124,7 +124,12 @@ module.exports = {
     const fechaFin = new Date(fechaInicio.getTime() + duracionTotal * 60000);
 
     // 5. Validar solapamiento con otras citas de la empleada
-    await validarSolapamiento(empleadaId, fechaInicio, fechaFin);
+    const haySolape = await validarSolapamiento(empleadaId, fechaInicio, fechaFin);
+
+    if (haySolape) {
+      return { error: "La empleada ya tiene una cita asignada en ese horario" };
+    }
+
 
     // 6. Calcular valor total
     const valorTotal = infoServicios.reduce(
