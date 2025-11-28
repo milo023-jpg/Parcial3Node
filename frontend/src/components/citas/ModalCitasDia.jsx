@@ -12,6 +12,7 @@ export default function ModalCitasDia({
   onEstado,
   onCancel,
   onCrearCita, // ← nueva prop para el botón "Crear cita"
+  onFinalizarConPago, // ← nueva prop para finalizar con pago
 }) {
   if (!isOpen) return null;
 
@@ -36,6 +37,7 @@ export default function ModalCitasDia({
                 onEdit={() => onEdit(cita.id)}
                 onEstado={(nuevoEstado) => onEstado(cita.id, nuevoEstado)}
                 onCancel={() => onCancel(cita.id)}
+                onFinalizarConPago={onFinalizarConPago}
               />
             ))
           )}

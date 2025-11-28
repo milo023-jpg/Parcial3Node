@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CitaCard({ cita, onEdit, onCancel, onEstado }) {
+export default function CitaCard({ cita, onEdit, onCancel, onEstado, onFinalizarConPago }) {
   const {
     cliente,
     fecha_inicio,
@@ -147,7 +147,7 @@ export default function CitaCard({ cita, onEdit, onCancel, onEstado }) {
         {/* FINALIZAR */}
         {mostrarBotones.includes("finalizar") && (
           <button
-            onClick={() => onEstado("finalizada")}
+            onClick={() => onFinalizarConPago ? onFinalizarConPago(cita) : onEstado("finalizada")}
             style={{
               background: "#2ecc71",
               border: "none",

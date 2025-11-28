@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import LayoutBase from "../components/LayoutBase";
+import { formatCurrency } from "../utils/formatters";
 import "./ReportesPage.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
@@ -91,7 +92,7 @@ export default function ReportesPage() {
           <div className="indicador-card morado">
             <div className="indicador-icon">💰</div>
             <div className="indicador-info">
-              <h3>${resumen?.ventasHoy?.toFixed(2) || "0.00"}</h3>
+              <h3>{formatCurrency(resumen?.ventasHoy)}</h3>
               <p>Ventas del día</p>
             </div>
           </div>
@@ -99,7 +100,7 @@ export default function ReportesPage() {
           <div className="indicador-card naranja">
             <div className="indicador-icon">📈</div>
             <div className="indicador-info">
-              <h3>${resumen?.ventasMes?.toFixed(2) || "0.00"}</h3>
+              <h3>{formatCurrency(resumen?.ventasMes)}</h3>
               <p>Ventas del mes</p>
             </div>
           </div>
@@ -131,7 +132,7 @@ export default function ReportesPage() {
                     <tr key={servicio.id}>
                       <td>{servicio.nombre}</td>
                       <td>{servicio.cantidad_vendida}</td>
-                      <td>${servicio.ingresos_totales.toFixed(2)}</td>
+                      <td>{formatCurrency(servicio.ingresos_totales)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -162,7 +163,7 @@ export default function ReportesPage() {
                       <td>{cliente.nombre} {cliente.apellido}</td>
                       <td>{cliente.telefono}</td>
                       <td>{cliente.total_citas}</td>
-                      <td>${cliente.total_gastado.toFixed(2)}</td>
+                      <td>{formatCurrency(cliente.total_gastado)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import LayoutBase from "../components/LayoutBase";
+import { formatCurrency } from "../utils/formatters";
 import "./HistorialVentas.css";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
@@ -134,7 +135,7 @@ export default function HistorialVentas() {
               <div className="resumen-icon">💵</div>
               <div>
                 <h4>Total Ventas</h4>
-                <p className="resumen-valor">${resumen.total_ventas.toFixed(2)}</p>
+                <p className="resumen-valor">{formatCurrency(resumen.total_ventas)}</p>
               </div>
             </div>
 
@@ -150,7 +151,7 @@ export default function HistorialVentas() {
               <div className="resumen-icon">📈</div>
               <div>
                 <h4>Promedio</h4>
-                <p className="resumen-valor">${resumen.promedio_venta.toFixed(2)}</p>
+                <p className="resumen-valor">{formatCurrency(resumen.promedio_venta)}</p>
               </div>
             </div>
           </div>
@@ -165,7 +166,7 @@ export default function HistorialVentas() {
                 <div key={metodo.metodo} className="metodo-item">
                   <span className="metodo-nombre">{metodo.metodo}</span>
                   <span className="metodo-cantidad">{metodo.cantidad} ventas</span>
-                  <span className="metodo-total">${metodo.total.toFixed(2)}</span>
+                  <span className="metodo-total">{formatCurrency(metodo.total)}</span>
                 </div>
               ))}
             </div>
@@ -200,7 +201,7 @@ export default function HistorialVentas() {
                           {venta.metodo_pago}
                         </span>
                       </td>
-                      <td className="monto">${venta.monto.toFixed(2)}</td>
+                      <td className="monto">{formatCurrency(venta.monto)}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -6,6 +6,7 @@ import SemanaGoogleView from "../../components/citas/SemanaGoogleView";
 import MesView from "../../components/citas/MesView";
 import FechaNavigator from "../../components/citas/FechaNavigator";
 import ModalCitasDia from "../../components/citas/ModalCitasDia";
+import ModalPago from "../../components/citas/ModalPago";
 import Sidebar from "../../components/Sidebar";
 
 import "../../App.css"; // si necesitas estilos generales
@@ -45,6 +46,8 @@ export default function CalendarioPage() {
     label: "",
     citas: [],
   });
+  const [mostrarModalPago, setMostrarModalPago] = useState(false);
+  const [citaParaPago, setCitaParaPago] = useState(null);
 
   const navigate = useNavigate();
 
@@ -77,6 +80,37 @@ export default function CalendarioPage() {
       setError(err.message || "Error desconocido");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // =======================
+  // Finalizar con pago
+  // =======================
+  const finalizarConPago = (cita) => {
+    setCitaParaPago(cita);
+    setMostrarModalPago(true);
+  };
+
+  const confirmarPago = async ({ metodo_pago, monto }) => {
+    try {
+      const response = await fetch(`${API_URL}/citas/${citaParaPago.id}/pago`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ metodo_pago, monto }),
+      });
+
+      if (response.ok) {
+        alert("Pago registrado y cita finalizada correctamente");
+        setMostrarModalPago(false);
+        setCitaParaPago(null);
+        await getCitas();
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error || "No se pudo registrar el pago"}`);
+      }
+    } catch (error) {
+      console.error("Error al registrar pago:", error);
+      alert("Error de conexión al registrar el pago");
     }
   };
 
@@ -300,8 +334,35 @@ export default function CalendarioPage() {
         fechaLabel={modalInfo.label}
         citas={modalInfo.citas}
         onVerDiaCompleto={verDiaCompleto}
-        onCrearCita={crearCitaEsteDia}   // ← AGREGA ESTA LÍNEA
+        onCrearCita={crearCitaEsteDia}
+        onEdit={(id) => navigate(`/citas/editar/${id}`)}
+        onEstado={async (id, estado) => {
+          await fetch(`${API_URL}/citas/${id}/estado`, {
+            method: "PATCH",
+            body: JSON.stringify({ estado }),
+            headers: { "Content-Type": "application/json" },
+          });
+          await getCitas();
+        }}
+        onCancel={async (id) => {
+          if (window.confirm("¿Cancelar esta cita?")) {
+            await fetch(`${API_URL}/citas/${id}/cancelar`, { method: "PATCH" });
+            await getCitas();
+          }
+        }}
+        onFinalizarConPago={finalizarConPago}
       />
+
+      {mostrarModalPago && citaParaPago && (
+        <ModalPago
+          cita={citaParaPago}
+          onConfirm={confirmarPago}
+          onCancel={() => {
+            setMostrarModalPago(false);
+            setCitaParaPago(null);
+          }}
+        />
+      )}
 
     </div>
   );

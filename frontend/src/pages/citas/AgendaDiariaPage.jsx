@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config/api";
 import FechaNavigator from "../../components/citas/FechaNavigator";
 import CitaCard from "../../components/citas/CitaCard";
-
+import ModalPago from "../../components/citas/ModalPago";
 import Sidebar from "../../components/Sidebar";
 
 function formatLocalISO(date) {
@@ -45,6 +45,8 @@ export default function AgendaDiariaPage() {
 
   const [citas, setCitas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [mostrarModalPago, setMostrarModalPago] = useState(false);
+  const [citaParaPago, setCitaParaPago] = useState(null);
 
   const empleadaId = localStorage.getItem("empleada_id") || "1"; // académico
 
@@ -99,6 +101,34 @@ export default function AgendaDiariaPage() {
   }
 
   const editarCita = (id) => navigate(`/citas/editar/${id}`);
+
+  const finalizarConPago = (cita) => {
+    setCitaParaPago(cita);
+    setMostrarModalPago(true);
+  };
+
+  const confirmarPago = async ({ metodo_pago, monto }) => {
+    try {
+      const response = await fetch(`${API_URL}/citas/${citaParaPago.id}/pago`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ metodo_pago, monto }),
+      });
+
+      if (response.ok) {
+        alert("Pago registrado y cita finalizada correctamente");
+        setMostrarModalPago(false);
+        setCitaParaPago(null);
+        await cargarCitas(formatLocalISO(fechaActual));
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error || "No se pudo registrar el pago"}`);
+      }
+    } catch (error) {
+      console.error("Error al registrar pago:", error);
+      alert("Error de conexión al registrar el pago");
+    }
+  };
 
   const cambiarEstado = async (id, estado) => {
     await fetch(`http://localhost:4000/api/citas/${id}/estado`, {
@@ -182,8 +212,20 @@ export default function AgendaDiariaPage() {
             onEdit={() => editarCita(cita.id)}
             onEstado={(nuevoEstado) => cambiarEstado(cita.id, nuevoEstado)}
             onCancel={() => cancelarCita(cita.id)}
+            onFinalizarConPago={finalizarConPago}
           />
         ))
+      )}
+
+      {mostrarModalPago && citaParaPago && (
+        <ModalPago
+          cita={citaParaPago}
+          onConfirm={confirmarPago}
+          onCancel={() => {
+            setMostrarModalPago(false);
+            setCitaParaPago(null);
+          }}
+        />
       )}
     </div>
   );
