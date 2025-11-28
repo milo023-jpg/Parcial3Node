@@ -35,7 +35,7 @@ export default function CitaModal({ cita, onClose, onUpdate }) {
       );
       if (!confirmar) return;
 
-      await fetch(`http://localhost:4000/api/citas/${id}/cancelar`, {
+      await fetch(`http://localhost:4000/api/citas/${cita.id}/cancelar`, {
         method: "PATCH",
       });
 
@@ -48,6 +48,7 @@ export default function CitaModal({ cita, onClose, onUpdate }) {
 
   // Redirigir a la edición
   const editarCita = () => {
+    console.log("ID que se está enviando a editar:", cita.id);
     navigate(`/citas/editar/${cita.id}`);
     onClose();
   };

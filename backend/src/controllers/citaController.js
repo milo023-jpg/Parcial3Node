@@ -209,3 +209,61 @@ exports.obtenerServiciosDeCita = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.obtenerCitaPorId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Obtener cita
+    const [citaRows] = await pool.query(
+      `
+      SELECT 
+        c.*,
+        cl.nombre AS cliente_nombre,
+        cl.apellido AS cliente_apellido
+      FROM citas c
+      INNER JOIN clientes cl ON cl.id = c.cliente_id
+      WHERE c.id = ?
+      `,
+      [id]
+    );
+
+    if (citaRows.length === 0) {
+      return res.status(404).json({ error: "Cita no encontrada" });
+    }
+
+    const cita = citaRows[0];
+
+    // Obtener servicios asociados
+    const [servicios] = await pool.query(
+      `
+      SELECT 
+        s.id,
+        s.nombre,
+        cs.duracion_minutos AS duracion,
+        cs.precio_servicio AS precio
+      FROM cita_servicios cs
+      INNER JOIN servicios s ON s.id = cs.servicio_id
+      WHERE cs.cita_id = ?
+      `,
+      [id]
+    );
+
+    cita.servicios = servicios;
+
+    // Cliente
+    cita.cliente = {
+      nombre: cita.cliente_nombre,
+      apellido: cita.cliente_apellido,
+    };
+
+    delete cita.cliente_nombre;
+    delete cita.cliente_apellido;
+
+    res.json(cita);
+
+  } catch (err) {
+    console.error("Error obtenerCitaPorId:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
